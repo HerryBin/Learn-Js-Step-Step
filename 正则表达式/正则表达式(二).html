@@ -84,6 +84,52 @@
 			var ret1=reg3.exec(ts);
 
 			var ret2=reg4.exec(ts);
+		/*String.prototype.search 用于检索字符串中指定的子字符串，或检索与正则表达式中相匹配的子字符串
+
+        *返回第一个匹配结果 Index,否则返回 -1
+
+        不执行全局匹配，自动忽略标识 g,并且总是从字符串的开始进行检索。
+
+        String.prototype.match(reg)
+
+        非全局调用，只会在字符串中执行一个匹配。
+            未找到，返回null；否则返回一个数组，其中包括：
+        index:声明匹配文本的起始字符位置；input 声明对 stringObject的引用（即用来匹配的字符串)
+        */
+
+	    var str='1a2b3c4d5e';
+
+	    console.log(str.match(/\d(\w)\d/)); //["1a2", "a", index: 0, input: "1a2b3c4d5e"]
+
+	    console.log(str.match(/\d\w\d/)); //["1a2", index: 0, input: "1a2b3c4d5e"]
+
+	    console.log(str.match(/\d(\w)\d/g));//["1a2", "3c4"]
+
+	     //String.prototype.split(reg) 如果传入字符串，起始是自动转换成 正则表达式了
+
+	     'a1b2c3'.split(/\d/g); //["a", "b", "c", ""]
+
+	     /**
+	      * String.prototype.replace(reg)
+	      * function 参数
+	      * 1、匹配字符串
+	      * 2、正则表达式分组内容，没有分组，则没有该参数
+	      * 3、匹配项在字符串中的index
+	      * 4、原字符串
+	      */
+	     'a1b2c3'.replace(/\d/g,'傻逼');
+
+	     //a1b2c3d4e5'==> "a2b3c4d5e6"
+	     'a1b2c3d4e5'.replace(/\d/g,function(match,index,origin){
+	         console.log(index);
+	         return parseInt(match)+1;
+	     });
+
+	    //a1b2c3d4e5==>"a1bc3de5"  只替换已经匹配的字符
+	    'a1b2c3d4e5'.replace(/(\d)(\w)(\d)/g,function(match,group1,group2,group3,index,origin){
+	         console.log(group1+'-'+group2+'-'+group3);
+	         return group1+group2;
+	     });
 
 	</script>
 </head>
